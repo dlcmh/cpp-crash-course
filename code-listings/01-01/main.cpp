@@ -1,6 +1,6 @@
 #include <cstdio>
 
 int main(){
-    printf("Hello, world!");
+    std::printf("Hello, world!\n");
     return 0;
 }
