@@ -185,8 +185,10 @@ view (⇧⌘M). The familiar built-in `"$gcc"` matcher also works at runtime, bu
 VS Code's JSON schema hasn't listed it for years and flags it as invalid —
 defining the matcher inline sidesteps that false positive.
 
-Create the debug launch config: **⇧⌘P → "Debug: Open launch.json"** — when
-asked for an environment, pick **LLDB** — then replace the contents with:
+Create the debug launch config: click **Run and Debug** in the Activity Bar
+(⇧⌘D), then click the **create a launch.json file** link. When asked to select
+a debugger, pick **LLDB** (from the CodeLLDB extension), then replace the
+generated contents with:
 
 ```json
 {
