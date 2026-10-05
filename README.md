@@ -161,14 +161,29 @@ from template" → "Others"**, then replace the file contents with:
       "type": "shell",
       "command": "mkdir -p \"${workspaceFolder}/build/${relativeFileDirname}\" && clang++ -std=c++20 -Wall -Wextra -Wpedantic -g \"${file}\" -o \"${workspaceFolder}/build/${relativeFileDirname}/${fileBasenameNoExtension}\"",
       "group": { "kind": "build", "isDefault": true },
-      "problemMatcher": ["$gcc"]
+      "problemMatcher": {
+        "owner": "cpp",
+        "fileLocation": ["autoDetect"],
+        "pattern": {
+          "regexp": "^(.*?):(\\d+):(\\d+):\\s+(?:fatal )?(?:warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
     }
   ]
 }
 ```
 
 It compiles whatever `.cpp` file is focused, with debug symbols, into `build/`
-mirroring the source tree (e.g. `build/code-listings/<NN-NN>/main`).
+mirroring the source tree (e.g. `build/code-listings/<NN-NN>/main`). The
+inline problem matcher parses Clang's warnings and errors into the Problems
+view (⇧⌘M). The familiar built-in `"$gcc"` matcher also works at runtime, but
+VS Code's JSON schema hasn't listed it for years and flags it as invalid —
+defining the matcher inline sidesteps that false positive.
 
 Create the debug launch config: **⇧⌘P → "Debug: Open launch.json"** — when
 asked for an environment, pick **LLDB** — then replace the contents with:
