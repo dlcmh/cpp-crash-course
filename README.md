@@ -168,7 +168,7 @@ from template" → "Others"**, then replace the file contents with:
 ```
 
 It compiles whatever `.cpp` file is focused, with debug symbols, into `build/`
-mirroring the source tree (`build/code-listings/01-09/main`).
+mirroring the source tree (e.g. `build/code-listings/<NN-NN>/main`).
 
 Create the debug launch config: **⇧⌘P → "Debug: Open launch.json"** — when
 asked for an environment, pick **LLDB** — then replace the contents with:
