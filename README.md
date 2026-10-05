@@ -53,6 +53,27 @@ debuggable out of the box.
 
 4. Sanity check: `cmake --version`.
 
+**Why `brew install cmake ninja ccache`?** For the single-file listings,
+strictly speaking, none of the three is needed — `clang++` and `lldb` (from
+the Command Line Tools) do all the work. They're installed once because each
+maps to a concrete part of this workflow:
+
+- **cmake** powers [the CMake route](#7-multi-file-projects-the-cmake-route).
+  The moment you go past a single `main.cpp` or want a third-party library,
+  this is the tool that generates the build.
+- **ninja** is a fast build executor that CMake generates build files *for*
+  once a `CMakeLists.txt` exists. Strictly optional — CMake falls back to
+  Makefiles — but it's the usual default: faster incremental rebuilds, cleaner
+  output.
+- **ccache** is a compiler cache: on rebuild it replays the previous
+  compilation from disk instead of recompiling unchanged code. Invisible with
+  one-file listings, but in a real project (especially switching Debug/Release)
+  it turns multi-second rebuilds into near-instant ones. Wired in via
+  `-DCMAKE_CXX_COMPILER_LAUNCHER=ccache` in the CMake section.
+
+If you prefer a minimal setup, `brew install cmake` alone is enough; treat
+`ninja` and `ccache` as optional accelerators.
+
 ### 2. Install VS Code
 
 Either `brew install --cask visual-studio-code`, or manually: download the
