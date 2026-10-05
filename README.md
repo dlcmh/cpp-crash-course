@@ -197,7 +197,7 @@ stdin, and that's the console mode where typing input works while debugging.
 
 1. From the repo root: `code .`
 2. Open the **Explorer** (⇧⌘E). Hover `code-listings` → click **New Folder…**
-   → type `01-09` → Return. Hover the new folder → click **New File…** → type
+   → type `<NN-NN>` → Return. Hover the new folder → click **New File…** → type
    `main.cpp` → Return.
 3. Write the code. clangd completes as you type (force it with **⌃Space**),
    squiggles mark problems, and **⌘.** offers quick fixes. Save with **⌘S** —
@@ -206,18 +206,18 @@ stdin, and that's the console mode where typing input works while debugging.
    **⇧⌘B**. The terminal panel shows the compile; anything the compiler flags
    also lands in the **Problems** view (⇧⌘M).
 5. Run: press **⌃`** to focus the terminal, then
-   `./build/code-listings/01-09/main` — or press **⌃F5** ("Run Without
+   `./build/code-listings/<NN-NN>/main` — or press **⌃F5** ("Run Without
    Debugging") to let the launch config build and run it.
 6. Commit: click **Source Control** in the Activity Bar (⌃⇧G), hover each
-   changed file → click **+** to stage, type `Listing 1-9` as the message,
+   changed file → click **+** to stage, type `Listing N-M` as the message,
    press **⌘Enter** to commit, then click **Sync Changes** to push.
 
 The raw-terminal equivalent of steps 4–5, for when VS Code isn't open:
 
 ```sh
-clang++ -std=c++20 -Wall -Wextra -Wpedantic -g code-listings/01-09/main.cpp \
-  -o build/code-listings/01-09/main
-./build/code-listings/01-09/main
+clang++ -std=c++20 -Wall -Wextra -Wpedantic -g code-listings/<NN-NN>/main.cpp \
+  -o build/code-listings/<NN-NN>/main
+./build/code-listings/<NN-NN>/main
 ```
 
 ### 6. Debugging
@@ -269,7 +269,7 @@ For anything past a single `main.cpp`:
   task args (or a CMake preset). Memory errors and undefined behavior now
   abort with a full report at the exact offending line — debug that build
   with F5 as usual.
-- **Leaks**: `leaks --atExit -- ./build/code-listings/01-09/main` prints every
+- **Leaks**: `leaks --atExit -- ./build/code-listings/<NN-NN>/main` prints every
   leaked allocation — macOS's native equivalent of LeakSanitizer.
 
 ### 9. Shortcut cheat sheet
