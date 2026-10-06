@@ -149,14 +149,21 @@ CompileFlags:
 Diagnostics:
   ClangTidy:
     Add: [bugprone-*, performance-*, modernize-*, readability-*]
-    Remove: [modernize-use-trailing-return-type, readability-identifier-length]
+    Remove:
+      - modernize-use-trailing-return-type
+      - readability-identifier-length
+      - readability-braces-around-statements
 ```
 
 (`Remove` silences specific checks by name. `modernize-use-trailing-return-type`
 nags every ordinary `int main()` to be rewritten as `auto main() -> int`:
 technically valid, widely considered noise. `readability-identifier-length`
 flags short names like `x` and loop counters `i`, `j` — exactly the names that
-are correct in small listing-style code. Add any other check the same way.)
+are correct in small listing-style code. `readability-braces-around-statements`
+demands braces on every single-statement `if`/`else`/loop body; worthy as team
+policy in large codebases, but in listings a one-line guard like
+`if (!x) return;` reads clearer bare than wrapped in ceremony. Add any other
+check the same way.)
 
 (`-std=c++20`; use `c++17` if your book targets C++17. This file is tracked by
 git, unlike `.vscode/`.)
