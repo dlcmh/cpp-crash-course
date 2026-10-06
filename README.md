@@ -96,9 +96,14 @@ for each, and click **Install**:
 | CodeLLDB | `vadimcn.vscode-lldb` | Debugging with LLDB, the debugger macOS actually supports. |
 | CMake Tools | `ms-vscode.cmake-tools` | Configure/build/debug CMake projects from the status bar. |
 
-If Microsoft's **C/C++** extension is installed, uninstall it (or set
-`"C_Cpp.intelliSenseEngine": "disabled"`) — running two IntelliSense engines
-produces duplicate squiggles and fights over the language server.
+Microsoft's **C/C++** extension fights over IntelliSense with clangd, but it's
+still worth keeping around in a hobbled state: install it, then set
+`"C_Cpp.intelliSenseEngine": "disabled"` in settings.json. That leaves clangd
+as the only language server (no duplicate squiggles) while cpptools continues
+to contribute the `$gcc`/`$clang` problem matchers used by `tasks.json` below,
+plus the `cppdbg` debug adapter as a spare. Uninstalling it entirely also
+works — just know the `$gcc` matcher reference in the build task will then be
+flagged by the schema and won't resolve at runtime.
 
 > **About "C/C++ DevTools" (`ms-vscode.cpp-devtools`)**: it often appears as an
 > auto-installed dependency of the C/C++ Extension Pack or CMake Tools. It's
@@ -178,9 +183,9 @@ from template" → "Others"**, then replace the file contents with:
 It compiles whatever `.cpp` file is focused, with debug symbols, into `build/`
 mirroring the source tree (e.g. `build/code-listings/<NN-NN>/main`). The
 `$gcc` matcher parses Clang's warnings and errors into the Problems view
-(⇧⌘M). If VS Code flags that line with "Value is not accepted", it's a false
-positive — the JSON schema hasn't listed the built-in `$gcc` matcher in years,
-but it works fine at runtime.
+(⇧⌘M). Note it is not a VS Code built-in — it's contributed by the C/C++
+extension from step 3, which is why the reference only validates (and only
+works at runtime) with that extension installed, IntelliSense disabled or not.
 
 Create the debug launch config: click **Run and Debug** in the Activity Bar
 (⇧⌘D), then click the **create a launch.json file** link. When asked to select
