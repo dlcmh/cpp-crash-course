@@ -161,18 +161,7 @@ from template" → "Others"**, then replace the file contents with:
       "type": "shell",
       "command": "mkdir -p \"${workspaceFolder}/build/${relativeFileDirname}\" && clang++ -std=c++20 -Wall -Wextra -Wpedantic -g \"${file}\" -o \"${workspaceFolder}/build/${relativeFileDirname}/${fileBasenameNoExtension}\"",
       "group": { "kind": "build", "isDefault": true },
-      "problemMatcher": {
-        "owner": "cpp",
-        "fileLocation": ["autoDetect"],
-        "pattern": {
-          "regexp": "^(.*?):(\\d+):(\\d+):\\s+(?:fatal )?(?:warning|error):\\s+(.*)$",
-          "file": 1,
-          "line": 2,
-          "column": 3,
-          "severity": 4,
-          "message": 5
-        }
-      }
+      "problemMatcher": ["$gcc"]
     }
   ]
 }
@@ -180,10 +169,10 @@ from template" → "Others"**, then replace the file contents with:
 
 It compiles whatever `.cpp` file is focused, with debug symbols, into `build/`
 mirroring the source tree (e.g. `build/code-listings/<NN-NN>/main`). The
-inline problem matcher parses Clang's warnings and errors into the Problems
-view (⇧⌘M). The familiar built-in `"$gcc"` matcher also works at runtime, but
-VS Code's JSON schema hasn't listed it for years and flags it as invalid —
-defining the matcher inline sidesteps that false positive.
+`$gcc` matcher parses Clang's warnings and errors into the Problems view
+(⇧⌘M). If VS Code flags that line with "Value is not accepted", it's a false
+positive — the JSON schema hasn't listed the built-in `$gcc` matcher in years,
+but it works fine at runtime.
 
 Create the debug launch config: click **Run and Debug** in the Activity Bar
 (⇧⌘D), then click the **create a launch.json file** link. When asked to select
