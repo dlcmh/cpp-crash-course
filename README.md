@@ -149,7 +149,12 @@ CompileFlags:
 Diagnostics:
   ClangTidy:
     Add: [bugprone-*, performance-*, modernize-*, readability-*]
+    Remove: [modernize-use-trailing-return-type]
 ```
+
+(`Remove` silences specific checks by name — `modernize-use-trailing-return-type`
+nags every ordinary `int main()` to be rewritten as `auto main() -> int`:
+technically valid, widely considered noise. Add any other check the same way.)```
 
 (`-std=c++20`; use `c++17` if your book targets C++17. This file is tracked by
 git, unlike `.vscode/`.)
