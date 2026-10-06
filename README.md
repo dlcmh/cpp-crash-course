@@ -156,6 +156,7 @@ Diagnostics:
       - modernize-use-trailing-return-type
       - readability-identifier-length
       - readability-braces-around-statements
+      - readability-magic-numbers
 ```
 
 (`Remove` silences specific checks by name. `modernize-use-trailing-return-type`
@@ -165,8 +166,11 @@ flags short names like `x` and loop counters `i`, `j` — exactly the names that
 are correct in small listing-style code. `readability-braces-around-statements`
 demands braces on every single-statement `if`/`else`/loop body; worthy as team
 policy in large codebases, but in listings a one-line guard like
-`if (!x) return;` reads clearer bare than wrapped in ceremony. Add any other
-check the same way.)
+`if (!x) return;` reads clearer bare than wrapped in ceremony.
+`readability-magic-numbers` wants every numeric literal hoisted into a named
+`constexpr` — sound practice for production code, but book listings exist to
+show the concept, and `printf("%d\n", 42)` is clearer than a constant named
+`kAnswer` for it. Add any other check the same way.)
 
 (`-std=c++20`; use `c++17` if your book targets C++17. This file is tracked by
 git, unlike `.vscode/`.)
