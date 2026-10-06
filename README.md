@@ -100,6 +100,14 @@ If Microsoft's **C/C++** extension is installed, uninstall it (or set
 `"C_Cpp.intelliSenseEngine": "disabled"`) — running two IntelliSense engines
 produces duplicate squiggles and fights over the language server.
 
+> **About "C/C++ DevTools" (`ms-vscode.cpp-devtools`)**: it often appears as an
+> auto-installed dependency of the C/C++ Extension Pack or CMake Tools. It's
+> not a toolchain piece — it just exposes symbol lookup and CMake operations as
+> tools for GitHub Copilot's agent mode, and does nothing without Copilot. In
+> this clangd-based setup its C++ half has no engine to draw on anyway (it
+> feeds off `cpptools` IntelliSense). Safe to ignore or uninstall unless you
+> use Copilot agent mode.
+
 ### 4. Configure the workspace
 
 `.vscode/` is git-ignored in this repo by design (settings are per-machine);
