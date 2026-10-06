@@ -174,7 +174,16 @@ Create **`.clang-format`** in the repo root — tweak to taste:
 BasedOnStyle: LLVM
 IndentWidth: 4
 ColumnLimit: 100
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
 ```
+
+(The last two lines stop clang-format from forcing single-statement `if` /
+`else if` / `else` / loop bodies onto their own line — the LLVM base style
+otherwise splits `else std::printf("Zero.\n");` into two lines on every save.
+`AllIfsAndElse` keeps one-liners exactly as typed; use `Always` if you'd still
+like bare `else` bodies broken, or `WithoutElse` for one-liners only when
+there's no `else` clause.)
 
 Create the build task: **⇧⌘P → "Tasks: Configure Task" → "Create tasks.json
 from template" → "Others"**, then replace the file contents with:
