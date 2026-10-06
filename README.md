@@ -134,6 +134,9 @@ Settings (JSON)"** and paste:
     "editor.formatOnSave": true,
     "editor.rulers": [100]
   },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
   "cmake.configureOnOpen": false
 }
 ```
@@ -176,7 +179,12 @@ IndentWidth: 4
 ColumnLimit: 100
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLoopsOnASingleLine: true
+InsertNewlineAtEOF: true
 ```
+
+(`InsertNewlineAtEOF` guarantees every file ends with exactly one terminating
+newline — the POSIX text-file convention that keeps `git diff`, patches and
+Unix tools happy — even for files created outside VS Code.)
 
 (The last two lines stop clang-format from forcing single-statement `if` /
 `else if` / `else` / loop bodies onto their own line — the LLVM base style
