@@ -172,6 +172,9 @@ policy in large codebases, but in listings a one-line guard like
 show the concept, and `printf("%d\n", 42)` is clearer than a constant named
 `kAnswer` for it. Add any other check the same way.)
 
+Edits to `.clangd` take effect only for new sessions: apply them with
+**⇧⌘P → "clangd: Restart language server"**.
+
 (`-std=c++20`; use `c++17` if your book targets C++17. This file is tracked by
 git, unlike `.vscode/`.)
 
@@ -341,6 +344,7 @@ For anything past a single `main.cpp`:
 | Rename symbol | F2 |
 | Go to definition / references | F12 / ⇧F12 |
 | Quick fix | ⌘. |
+| Restart clangd (after `.clangd` changes) | ⇧⌘P → "clangd: Restart language server" |
 | Toggle breakpoint | F9 |
 | Debug / continue | F5 |
 | Step over / into / out | F10 / F11 / ⇧F11 |
