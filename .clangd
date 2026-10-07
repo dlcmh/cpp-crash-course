@@ -8,3 +8,4 @@ Diagnostics:
       - modernize-use-trailing-return-type
       - readability-identifier-length
       - readability-braces-around-statements
+      - readability-magic-numbers
